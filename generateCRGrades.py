@@ -6,7 +6,7 @@ name = 'Company Presentation Peer Evaluation (Responses)'
 person = raw_input("Whose feedback do you want? ")
 score = raw_input("What was their score? ")
 
-gc = gspread.Client(auth=(os.environ['EMAIL'], os.environ['PWD']))
+gc = gspread.Client(auth=(os.environ['EMAIL'], os.environ['PASSWD']))
 gc.login()
 try:
     sht = gc.open(name)
@@ -23,6 +23,7 @@ num = 2
 peer_score = 0
 for i in range(0, len(cells)):
     if cells[i].col == 3:
+        print cells[i].row
         feedback_row = wkst.row_values(cells[i].row)
         feedback_wksht.update_acell('A'+str(num), feedback_row[3])
         peer_score = peer_score + int(feedback_row[5])
